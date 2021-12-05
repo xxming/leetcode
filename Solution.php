@@ -165,4 +165,102 @@ class solution
 
         return $str;
     }
+
+    /**
+     * 字符串轮转
+     * eg:
+     * Input    : "waterbottle"
+     *            "erbottlewat"
+     * Output   : true
+     * Expected : true
+     * @param String $s1
+     * @param String $s2
+     * @return Boolean
+     */
+    function isFlipedString($s1, $s2) {
+
+        if (strlen($s1) != strlen($s2))
+        {
+            return false;
+        }
+
+        if ($s1 === $s2)
+        {
+            return true;
+        }
+
+        if (strpos($s2 . $s2, $s1) !== false)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * 移除重复节点
+     *
+     * Definition for a singly-linked list.
+     * class ListNode {
+     *     public $val = 0;
+     *     public $next = null;
+     *     function __construct($val) { $this->val = $val; }
+     * }
+     *
+     * eg:
+     * Input    : [1, 2, 3, 3, 2, 1]
+     * Output   : [1,2,3]
+     * Expected : [1,2,3]
+     *
+     */
+    function removeDuplicateNodes($head) {
+
+        $cur = $head;
+        $arr = [$cur->val => 1];
+
+        while($cur->next)
+        {
+            if(isset($arr[$cur->next->val]))
+            {
+                $cur->next = $cur->next->next;
+            }
+            else
+            {
+                $arr[$cur->next->val] = 1;
+                $cur = $cur->next;
+            }
+        }
+
+        return $head;
+    }
+
+    /**
+     * 是否回文链表
+     *
+     * Definition for a singly-linked list.
+     * class ListNode {
+     *     public $val = 0;
+     *     public $next = null;
+     *     function __construct($val) { $this->val = $val; }
+     * }
+     *
+     * eg:
+     * Input    : [1,2]
+     * Output   : false
+     * Expected : false
+     *
+     */
+    function isPalindrome($head) {
+
+        $arr = [];
+
+        while ($head)
+        {
+            $arr[] = $head->val;
+
+            $head = $head->next;
+        }
+
+        return $arr == array_reverse($arr);
+    }
 }
